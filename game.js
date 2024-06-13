@@ -11,6 +11,9 @@ let bravoTimer = null;
 let returnToMenuTimer = null;
 let bonusTimer = null;
 let bonusMoveTimer = null;
+let levelTimer = null;
+let lossTimer = null;
+let friteTrouvee = false;
 
 function preload() {
     backgroundImg = loadImage('Capture décran .png', () => {
@@ -57,7 +60,7 @@ function setup() {
 
 function draw() {
     if (backgroundImg) {
-        image(backgroundImg, 0, 0, width, height); // Redimensionner l'image de fond pour qu'elle prenne la taille du canevas
+        image(backgroundImg, 0, 0, width, height);
     } else {
         background(0);
         console.error('Background image not loaded');
@@ -67,6 +70,8 @@ function draw() {
         displayMenu();
     } else if (gameState === "jeu") {
         displayGame();
+    } else if (gameState === "loss") {
+        displayLoss();
     }
 }
 
@@ -98,7 +103,7 @@ function displayMenu() {
 
 function displayGame() {
     if (currentImage) {
-        image(currentImage, 0, 0, width, height); // Redimensionner l'image actuelle pour qu'elle prenne la taille du canevas
+        image(currentImage, 0, 0, width, height);
     }
     if (frite.position) {
         let scaledWidth = frite.image.width * frite.scale;
@@ -126,6 +131,35 @@ function displayGame() {
                 niveauxDebloques.push("Niveau Bonus");
             }
         }
+
+        if (!friteTrouvee && levelTimer !== null && millis() >= levelTimer) {
+            gameState = "loss";
+            lossTimer = millis() + 3000; // Afficher "Perdu" pendant 3 secondes
+        }
+
+        if (levelTimer !== null) {
+            let timeLeft = int((levelTimer - millis()) / 1000);
+            fill(0);
+            textSize(24);
+            text(`Temps restant: ${timeLeft}s`, width - 200, 30);
+        }
+    }
+}
+
+function displayLoss() {
+    if (lossTimer !== null && millis() < lossTimer) {
+        fill(255, 0, 0);
+        textAlign(CENTER, CENTER);
+        textSize(250);
+        text("Perdu !", width / 2, height / 2);
+    } else {
+        gameState = "menu";
+        currentImage = null;
+        frite.position = null;
+        bravoDisplayed = false;
+        bravoTimer = null;
+        returnToMenuTimer = null;
+        niveauxDebloques = ["Niveau 1"];
     }
 }
 
@@ -138,10 +172,12 @@ function mousePressed() {
                 gameState = "jeu";
                 frite.scale = button.scale;
                 if (button.text === "Niveau Bonus") {
-                    frite.scale = 0.2;  // Échelle plus petite pour le niveau bonus
+                    frite.scale = 0.2;
                 }
                 frite.position = { x: random(0, width - frite.image.width), y: random(0, height - frite.image.height) };
                 bonusTimer = millis() + 5000;
+                levelTimer = millis() + 10000; // Démarre le timer pour le niveau
+                friteTrouvee = false;
             }
         });
     } else if (gameState === "jeu" && frite.position) {
@@ -150,10 +186,9 @@ function mousePressed() {
         if (mouseX >= frite.position.x && mouseX <= frite.position.x + scaledWidth &&
             mouseY >= frite.position.y && mouseY <= frite.position.y + scaledHeight) {
             bravoDisplayed = true;
-            bravoTimer = millis() + 2000;
-            returnToMenuTimer = null;
+            bravoTimer = millis() + 2000; // Affiche "Bravo" pendant 2 secondes
+            friteTrouvee = true; // Arrête le minuteur lorsque la frite est trouvée
+            levelTimer = null; // Désactive le minuteur
         }
     }
 }
-
-
