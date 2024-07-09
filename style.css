@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+}
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1080px; /* Largeur du jeu */
+    height: 720px; /* Hauteur du jeu */
+    background-color: #fff; /* Fond blanc pour le conteneur du jeu */
+}
