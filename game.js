@@ -16,37 +16,37 @@ let lossTimer = null;
 let friteTrouvee = false;
 
 function preload() {
-    backgroundImg = loadImage('Capture décran .png', () => {
+    backgroundImg = loadImage('images/background.png', () => {
         console.log('Background image loaded');
     }, () => {
         console.error('Failed to load background image');
     });
 
-    buttonImages["Niveau 1"] = loadImage('DALL·E 2023-08-15 13.51.15 - interieur restrauranta frite style dessin  colorie.png', () => {
+    buttonImages["Niveau 1"] = loadImage('images/first_level.png', () => {
         console.log('Button image Niveau 1 loaded');
     }, () => {
         console.error('Failed to load button image Niveau 1');
     });
 
-    buttonImages["Niveau 2"] = loadImage('DALL·E 2023-08-20 12.26.23 - interieur restrauranta frite style dessin  colorie2.png', () => {
+    buttonImages["Niveau 2"] = loadImage('images/two_level.png', () => {
         console.log('Button image Niveau 2 loaded');
     }, () => {
         console.error('Failed to load button image Niveau 2');
     });
 
-    buttonImages["Niveau 3"] = loadImage('DALL·E 2023-08-20 12.36.48 - une restrauranta frite style dessin  colorie.png', () => {
+    buttonImages["Niveau 3"] = loadImage('images/three_level.png', () => {
         console.log('Button image Niveau 3 loaded');
     }, () => {
         console.error('Failed to load button image Niveau 3');
     });
 
-    buttonImages["Niveau Bonus"] = loadImage('DALL·E 2023-08-20 13.33.25 - interieur restrauranta frite style dessin  colorie.png', () => {
+    buttonImages["Niveau Bonus"] = loadImage('images/bonus_level.png', () => {
         console.log('Button image Niveau Bonus loaded');
     }, () => {
         console.error('Failed to load button image Niveau Bonus');
     });
 
-    friteImg = loadImage('frite-removebg-preview.png', () => {
+    friteImg = loadImage('images/frite.png', () => {
         console.log('Frite image loaded');
     }, () => {
         console.error('Failed to load frite image');
