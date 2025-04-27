@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden; /* Empêche les barres de défilement inutiles */
+}
+
+canvas {
+    display: block; /* Supprime l'espace supplémentaire sous le canvas */
+    max-width: 100vw; /* Le canvas ne dépassera pas la largeur de la fenêtre (viewport width) */
+    max-height: 100vh; /* Le canvas ne dépassera pas la hauteur de la fenêtre (viewport height) */
+    width: auto;    /* Conserve le rapport hauteur/largeur */
+    height: auto;   /* Conserve le rapport hauteur/largeur */
+}
